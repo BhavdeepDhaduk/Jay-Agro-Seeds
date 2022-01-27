@@ -11,12 +11,14 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import CreateProfileScreen from '../screens/CreateProfileScreen';
 import HomeScreen from '../screens/HomeScreen';
+import animScreen from '../screens/animScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const HomeScreenStack = props => {
-  console.log('HomeStack props: ', props.navigation);
+  // console.log('HomeStack props: ', props.navigation);
 
   useEffect(() => {
     props.navigation.setOptions({
@@ -32,6 +34,22 @@ const HomeScreenStack = props => {
           />
         </TouchableOpacity>
       ),
+      headerRight: () => (
+        <View style={{flexDirection: 'row'}}>
+          <Feather
+            name="bell"
+            size={25}
+            color="black"
+            style={{marginRight: 20}}
+          />
+          <Feather
+            name="shopping-bag"
+            size={25}
+            color="black"
+            style={{marginRight: 20}}
+          />
+        </View>
+      ),
     });
   }, []);
 
@@ -45,30 +63,14 @@ const HomeScreenStack = props => {
 const HomeDrawerNavigator = props => {
   return (
     <Drawer.Navigator>
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
       <Drawer.Screen
         name="HomeStack"
         component={HomeScreenStack}
         options={{
           headerTitle: 'Jay Seeds',
-          headerRight: () => (
-            <View style={{flexDirection: 'row'}}>
-              <Feather
-                name="bell"
-                size={25}
-                color="black"
-                style={{marginRight: 10}}
-              />
-              <Feather
-                name="shopping-bag"
-                size={25}
-                color="black"
-                style={{marginRight: 20}}
-              />
-            </View>
-          ),
         }}
       />
-      {/* <Drawer.Screen name="Profile" component={CreateProfileScreen} /> */}
     </Drawer.Navigator>
   );
 };
@@ -77,6 +79,7 @@ const MainNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
+        {/* <Stack.Screen name="anim" component={animScreen} /> */}
         <Stack.Screen name="HomeDrawer" component={HomeDrawerNavigator} />
         <Stack.Screen
           name="CreateProfile"
