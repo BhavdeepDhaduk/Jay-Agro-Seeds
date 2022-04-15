@@ -9,6 +9,8 @@ import {
 import {Easing} from 'react-native-reanimated';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import CustomText from '../constants/CustomText';
 import style from '../constants/style';
@@ -17,6 +19,44 @@ import color from '../constants/theme/color';
 const HomeScreen = props => {
   const [askExpertWidth, setAskExpertWidth] = useState(new Animated.Value(120));
   const [isWide, setIsWide] = useState(true);
+
+  useEffect(() => {
+    props.navigation.setOptions({
+      title: 'Jay Seeds',
+      headerLeft: () => (
+        <TouchableOpacity
+          activeOpacity={0.3}
+          onPress={() => props.drawerProps.navigation.toggleDrawer()}>
+          <Ionicons
+            name="ios-menu"
+            size={25}
+            color="black"
+            style={{marginRight: 10, marginTop: 3}}
+          />
+        </TouchableOpacity>
+      ),
+      headerRight: () => (
+        <View style={{flexDirection: 'row'}}>
+          <Feather
+            name="bell"
+            size={25}
+            color="black"
+            style={{marginRight: 20}}
+          />
+          <TouchableOpacity
+            activeOpacity={0.3}
+            onPress={() => props.navigation.navigate('MyBag')}>
+            <Feather
+              name="shopping-bag"
+              size={25}
+              color="black"
+              style={{marginRight: 20}}
+            />
+          </TouchableOpacity>
+        </View>
+      ),
+    });
+  });
 
   const toggleAnimation = () => {
     if (isWide == false) {

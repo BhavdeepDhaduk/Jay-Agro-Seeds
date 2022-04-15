@@ -10,7 +10,7 @@ import style from '../constants/style';
 import color from '../constants/theme/color';
 
 const LoginScreen = () => {
-  const [number, setNumber] = useState('');
+  const [number, setNumber] = useState('12');
 
   return (
     <View style={style.screen}>
